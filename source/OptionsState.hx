@@ -394,7 +394,10 @@ class NotesSubstate extends MusicBeatSubstate
 	}
 }
 
-class NoteSkinSubstate extends MusicBeatSubstate
+// this code is supposed to be a note skin but i'm dumb so i'm letting one of my team do this lol
+// uh i should really learn haxe shit
+
+/*class NoteSkinSubstate extends MusicBeatSubstate
 {
     // what am i doing
     public function new() {
@@ -426,7 +429,7 @@ class NoteSkinSubstate extends MusicBeatSubstate
     override function update(elapsed:Float) {
     
     }
-}
+}*/
 
 class ControlsSubstate extends MusicBeatSubstate {
 	private static var curSelected:Int = -1;

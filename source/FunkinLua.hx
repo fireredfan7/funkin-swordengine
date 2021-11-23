@@ -142,6 +142,7 @@ class FunkinLua {
 		// Some settings, no jokes
 		set('downscroll', ClientPrefs.downScroll);
 		set('optimization', ClientPrefs.optimization);
+		set('noteskin', ClientPrefs.noteSkin);
 		set('middlescroll', ClientPrefs.middleScroll);
 		set('framerate', ClientPrefs.framerate);
 		set('ghostTapping', ClientPrefs.ghostTapping);
