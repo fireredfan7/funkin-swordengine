@@ -775,6 +775,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 		'Note Size',
 		'Custom Scroll Speed',
 		'Scroll Speed',
+		'Hit Sounds',
+		'Miss Sounds',
 		'Engine Watermarks',
 		'Hide HUD',
 		'Hide Song Length',
@@ -969,6 +971,12 @@ class PreferencesSubstate extends MusicBeatSubstate
 						
 					case 'Optimization':
 						ClientPrefs.optimization = !ClientPrefs.optimization;
+						
+					case 'Hit Sounds':
+						ClientPrefs.hitSounds = !ClientPrefs.hitSounds;
+						
+					case 'Miss Sounds':
+						ClientPrefs.missSounds = !ClientPrefs.missSounds;
 
 					case 'Persistent Cached Data':
 						ClientPrefs.imagesPersist = !ClientPrefs.imagesPersist;
@@ -1065,6 +1073,10 @@ class PreferencesSubstate extends MusicBeatSubstate
 				daText = "If checked, This will remove most background elements and remove characters.\nHelps with performance and focus. Currently does NOTHING yet.";
 			case 'Downscroll':
 				daText = "If checked, notes go Down instead of Up, simple enough.";
+			case 'Hit Sounds':
+				daText = "If checked, A sound will play when you hit a note.\nThis could help for focus.";
+			case 'Miss Sounds':
+				daText = "If checked, A sound will play when you miss a note.\nSelf explanatory.";
 			case 'Middlescroll':
 				daText = "If checked, hides Opponent's notes and your notes get centered.";
 			case 'Ghost Tapping':
@@ -1145,6 +1157,10 @@ class PreferencesSubstate extends MusicBeatSubstate
 						daValue = ClientPrefs.flashing;
 					case 'Downscroll':
 						daValue = ClientPrefs.downScroll;
+					case 'Hit Sounds':
+						daValue = ClientPrefs.hitSounds;
+					case 'Miss Sounds':
+						daValue = ClientPrefs.missSounds;
 					case 'Middlescroll':
 						daValue = ClientPrefs.middleScroll;
 					case 'Ghost Tapping':

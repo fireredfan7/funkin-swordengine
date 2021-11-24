@@ -3474,7 +3474,7 @@ songSpeed = SONG.speed;
 			}
 			RecalculateRating();
 
-			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
+			if(ClientPrefs.missSounds) FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
 			// FlxG.log.add('played imss note');
 
@@ -3607,6 +3607,8 @@ songSpeed = SONG.speed;
 				note.kill();
 				notes.remove(note, true);
 				note.destroy();
+				
+				if (ClientPrefs.hitSounds) FlxG.sound.play(Paths.sound('ChartingTick'));
 			}
 		}
 	}

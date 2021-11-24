@@ -32,6 +32,8 @@ class ClientPrefs {
 	public static var noteSkinNum:Int = 0;
 	public static var noteSkinArray:Array<String> = ['Arrows', 'Circles', 'Squares', 'Diamonds', 'Wii', 'Gloopie', 'Bob', 'Bosip'];
 	public static var noteSkin:String = 'Arrows';
+	public static var hitSounds:Bool = false;
+	public static var missSounds:Bool = true;
 
 	//Every key has two binds, these binds are defined on defaultKeys! If you want your control to be changeable, you have to add it on ControlsSubState (inside OptionsState.hx)'s list
 	public static var keyBinds:Map<String, Dynamic> = new Map<String, Dynamic>();
@@ -84,6 +86,8 @@ class ClientPrefs {
 		FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
 		FlxG.save.data.optimization = optimization;
 		FlxG.save.data.engineWatermarks = engineWatermarks;
+		FlxG.save.data.hitSounds = hitSounds;
+		FlxG.save.data.missSounds = missSounds;
 		
 		// note skin shit
 		FlxG.save.data.noteSkinNum = noteSkinNum;
@@ -176,6 +180,12 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.optimization != null) {
 			optimization = FlxG.save.data.optimization;
+		}
+		if(FlxG.save.data.hitSounds != null) {
+			hitSounds = FlxG.save.data.hitSounds;
+		}
+		if(FlxG.save.data.optimization != null) {
+			missSounds = FlxG.save.data.missSounds;
 		}
 		
 		// note skin shit
