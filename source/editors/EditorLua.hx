@@ -91,7 +91,7 @@ class EditorLua {
 		set('downscroll', ClientPrefs.downScroll);
 		set('middlescroll', ClientPrefs.middleScroll);
 		set('optimization', ClientPrefs.optimization);
-		set('noteskin', ClientPrefs.noteskin);
+		set('noteskin', ClientPrefs.noteSkin);
 
 		//stuff 4 noobz like you B)
 		Lua_helper.add_callback(lua, "getProperty", function(variable:String) {
