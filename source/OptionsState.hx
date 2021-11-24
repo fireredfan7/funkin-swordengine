@@ -137,6 +137,7 @@ class NotesSubstate extends MusicBeatSubstate
 	private var grpNotes:FlxTypedGroup<FlxSprite>;
 	private var shaderArray:Array<ColorSwap> = [];
 	var curValue:Float = 0;
+	var skin:String = 'NOTE';
 	var holdTime:Float = 0;
 	var hsvText:Alphabet;
 	var nextAccept:Int = 5;
@@ -159,7 +160,9 @@ class NotesSubstate extends MusicBeatSubstate
 			}
 
 			var note:FlxSprite = new FlxSprite(posX - 70, yPos);
-			note.frames = Paths.getSparrowAtlas('NOTE_assets');
+			skin = ClientPrefs.noteSkin;
+			if(ClientPrefs.noteSkin == 'Arrows') skin = 'NOTE';
+			note.frames = Paths.getSparrowAtlas('noteskins/' + skin + '_assets');
 			switch(i) {
 				case 0:
 					note.animation.addByPrefix('idle', 'purple0');
@@ -532,8 +535,8 @@ class NoteSkinSubstate extends MusicBeatSubstate
 	function changeSkin(change:Int = 0) {
 		skinSelected += change;
 		if (skinSelected < 0)
-			skinSelected = ClientPrefs.noteSkinArray.length;
-		if (skinSelected > ClientPrefs.noteSkinArray.length)
+			skinSelected = ClientPrefs.noteSkinArray.length - 1;
+		if (skinSelected > ClientPrefs.noteSkinArray.length - 1)
 			skinSelected = 0;
 			
 		// actually change the skin
