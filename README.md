@@ -145,3 +145,16 @@ NOTE: This should be used for fixing your character floating or being slightly u
 * Some stuff based on Week 7's changes has been put in (Background colors on Freeplay, Note splashes)
 * You can reset your Score on Freeplay/Story Mode by pressing Reset button.
 * You can listen to a song on Freeplay by pressing Space once.
+
+-------------------------------------
+
+## Cry About It Corner
+# Literally a place for swordcube to cry about shit
+I SWEAR TO FUCKING GOD SOME SHIT GOT REDONE IN THE LATEST UPDATE OT SOURCE
+IT LOOKS OSM UCH BETTER THAN THE CURENT OPTIONS MENU
+
+I DON'T KNOW IF I SHOULD REDO SE AGAIN ON THIS VERSION
+BUT I MIGHT NOT BECAUSE FUFK THAT SHIT
+DON'T WANNA GO THROUGH HELL
+
+ok that was cry about it #1 goodbye
