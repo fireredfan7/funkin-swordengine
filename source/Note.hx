@@ -219,7 +219,18 @@ class Note extends FlxSprite
 		
 		var skin:String = texture;
 		if(texture.length < 1) {
-			skin = PlayState.SONG.arrowSkin;
+			if(prefix.length > 0) {
+				skin = 'NOTE_assets';
+			} else {
+				skin = PlayState.arrowSkin;
+			}
+			
+			// should hopefully make custom notes use shit like
+			// WHATEVERNOTE_assets
+			// instead of expecting
+			// WHATEVERCircles_assets
+			// and crashing/freezing the game
+			
 			if(skin == null || skin.length < 1) {
 				skin = 'NOTE_assets';
 			}
@@ -237,21 +248,21 @@ class Note extends FlxSprite
 		var blahblah:String = arraySkin.join('/');
 		if(PlayState.isPixelStage) {
 			if(isSustainNote) {
-				loadGraphic(Paths.image('pixelUI/' + blahblah + 'ENDS'));
+				loadGraphic(Paths.image('noteskins/pixelUI/' + blahblah + 'ENDS'));
 				width = width / 4;
 				height = height / 2;
-				loadGraphic(Paths.image('pixelUI/' + blahblah + 'ENDS'), true, Math.floor(width), Math.floor(height));
+				loadGraphic(Paths.image('noteskins/pixelUI/' + blahblah + 'ENDS'), true, Math.floor(width), Math.floor(height));
 			} else {
-				loadGraphic(Paths.image('pixelUI/' + blahblah));
+				loadGraphic(Paths.image('noteskins/pixelUI/' + blahblah));
 				width = width / 4;
 				height = height / 5;
-				loadGraphic(Paths.image('pixelUI/' + blahblah), true, Math.floor(width), Math.floor(height));
+				loadGraphic(Paths.image('noteskins/pixelUI/' + blahblah), true, Math.floor(width), Math.floor(height));
 			}
 			setGraphicSize(Std.int(width * ClientPrefs.noteSize * 8.5));
 			loadPixelNoteAnims();
 			antialiasing = false;
 		} else {
-			frames = Paths.getSparrowAtlas(blahblah);
+			frames = Paths.getSparrowAtlas('noteskins/' + blahblah);
 			loadNoteAnims();
 			antialiasing = ClientPrefs.globalAntialiasing;
 		}

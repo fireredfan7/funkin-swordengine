@@ -23,14 +23,14 @@ class StrumNote extends FlxSprite
 		super(x, y);
 
 		var skin:String = 'NOTE_assets';
-		if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
+		if(PlayState.arrowSkin != null && PlayState.arrowSkin.length > 1) skin = PlayState.arrowSkin;
 
 		if(PlayState.isPixelStage)
 		{
-			loadGraphic(Paths.image('pixelUI/' + skin));
+			loadGraphic(Paths.image('noteskins/' + 'pixelUI/' + skin));
 			width = width / 4;
 			height = height / 5;
-			loadGraphic(Paths.image('pixelUI/' + skin), true, Math.floor(width), Math.floor(height));
+			loadGraphic(Paths.image('noteskins/' + 'pixelUI/' + skin), true, Math.floor(width), Math.floor(height));
 			animation.add('green', [6]);
 			animation.add('red', [7]);
 			animation.add('blue', [5]);
@@ -61,7 +61,7 @@ class StrumNote extends FlxSprite
 		}
 		else
 		{
-			frames = Paths.getSparrowAtlas(skin);
+			frames = Paths.getSparrowAtlas('noteskins/' + skin);
 			animation.addByPrefix('green', 'arrowUP');
 			animation.addByPrefix('blue', 'arrowDOWN');
 			animation.addByPrefix('purple', 'arrowLEFT');

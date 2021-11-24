@@ -399,40 +399,188 @@ class NotesSubstate extends MusicBeatSubstate
 
 class NoteSkinSubstate extends MusicBeatSubstate
 {
-
-// uncomment the code below by getting rid of the /* and the */
-/*
-    // what am i doing
+	private var strumNotesY:Float = 140;
+	private var colorNotesY:Float = 200;
+	private var skinSelected = 0;
+	private var strumNotes:FlxTypedGroup<FlxSprite>;
+	private var colorNotes:FlxTypedGroup<FlxSprite>;
+	private var skinNum:Int = 0;
+	private var skin:String = 'NOTE';
+	private var gamerText:FlxText;
+	private var skinText:FlxText;
+	private var oopsText:FlxText;
+        
     public function new() {
         super();
-        var noteGroup = new FlxTypedGroup<FlxSprite>();
         
-        var posX = (165 * i) + 35;
-        var posY:Float = 20;
-        
-        for (i in 0...3) {
-            var note:FlxSprite = new FlxSprite(posX - 70, posY);
-            note.frames = Paths.getSparrowAtlas('NOTE_assets');
-            switch(i) {
-                case 0:
-                    note.animation.addByPrefix('idle', 'purple0');
-                case 1:
-                    note.animation.addByPrefix('idle', 'blue0');
-                case 2:
-                    note.animation.addByPrefix('idle', 'green0');
-                case 3:
-                    note.animation.addByPrefix('idle', 'red0');
-            }
-            note.ID = i;
-            noteGroup.add(note);
-        }
-        return(noteGroup);
+	strumNotes = new FlxTypedGroup<FlxSprite>();
+	add(strumNotes);
+	
+	colorNotes = new FlxTypedGroup<FlxSprite>();
+	add(colorNotes);
+	
+	if (ClientPrefs.noteSkin == 'Arrows') {
+		skin = 'NOTE';
+	} else {
+		skin = ClientPrefs.noteSkin;
+	}
+	
+	skinNum = ClientPrefs.noteSkinNum;
+	skinSelected = ClientPrefs.noteSkinNum;
+	
+        // add the strum arrow preview
+        for (i in 0...4) {
+		var note:FlxSprite = new FlxSprite(1, strumNotesY);
+		note.frames = Paths.getSparrowAtlas('noteskins/' + skin + '_assets');
+		switch(i) {
+			case 0:
+				note.animation.addByPrefix('idle', 'arrowLEFT0');
+			case 1:
+				note.animation.addByPrefix('idle', 'arrowDOWN0');
+			case 2:
+				note.animation.addByPrefix('idle', 'arrowUP0');
+			case 3:
+				note.animation.addByPrefix('idle', 'arrowRIGHT0');
+		}
+		note.animation.play('idle');
+		note.antialiasing = ClientPrefs.globalAntialiasing;
+		strumNotes.add(note);
+	}
+	
+        // add the color arrow preview
+        for (i in 0...4) {
+		var note:FlxSprite = new FlxSprite(1, colorNotesY);
+		note.frames = Paths.getSparrowAtlas('noteskins/' + skin + '_assets');
+		switch(i) {
+			case 0:
+				note.animation.addByPrefix('idle', 'purple0');
+			case 1:
+				note.animation.addByPrefix('idle', 'blue0');
+			case 2:
+				note.animation.addByPrefix('idle', 'green0');
+			case 3:
+				note.animation.addByPrefix('idle', 'red0');
+		}
+		note.animation.play('idle');
+		note.antialiasing = ClientPrefs.globalAntialiasing;
+		colorNotes.add(note);
+	}
+	
+		// displays what skin you have selected lol
+		gamerText = new FlxText(50, 500, 1180, "<                        >", 32);
+		gamerText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		gamerText.scrollFactor.set();
+		gamerText.borderSize = 2.4;
+		add(gamerText);
+
+		skinText = new FlxText(50, 500, 1180, "note skin", 32);
+		skinText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		skinText.scrollFactor.set();
+		skinText.borderSize = 2.4;
+		add(skinText);
+		
+		// this basically is the warning that shows if you don't have custom note skin enabled
+		oopsText = new FlxText(50, 600, 1180, "note skin warning", 32);
+		oopsText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		oopsText.scrollFactor.set();
+		oopsText.borderSize = 2.4;
+		add(oopsText);
+
     }
     
     override function update(elapsed:Float) {
-    
+	super.update(elapsed);
+
+	// the ability to go back
+	if (controls.BACK) {
+		FlxG.sound.play(Paths.sound('cancelMenu'));
+		close();
+	}
+	
+	// skin scrolling
+	if (controls.UI_LEFT_P) {
+		if (ClientPrefs.customNoteSkin) changeSkin(-1);
+		if (ClientPrefs.customNoteSkin) FlxG.sound.play(Paths.sound('scrollMenu'));
+	}
+	if (controls.UI_RIGHT_P) {
+		if (ClientPrefs.customNoteSkin) changeSkin(1);
+		if (ClientPrefs.customNoteSkin) FlxG.sound.play(Paths.sound('scrollMenu'));
+	}
+	
+	for (i in 0...strumNotes.length) {
+		var item = strumNotes.members[i];
+		item.x = (145 * i) + 445;
+		item.setGraphicSize(Std.int(item.width * 0.8));
+	}
+	
+	for (i in 0...colorNotes.length) {
+		var item = colorNotes.members[i];
+		item.x = (145 * i) + 445;
+		item.setGraphicSize(Std.int(item.width * 0.8));
+	}
+	
+	skinText.text = ClientPrefs.noteSkin;
+	
+	oopsText.text = "Press left & right to switch skins.";
+	if (ClientPrefs.customNoteSkin) {
+		oopsText.text = "Press left & right to switch skins.";
+	} else {
+		oopsText.text = "Please enable Custom Note Skin in\npreferences before continuing.";
+	}
     }
-*/
+    
+	function changeSkin(change:Int = 0) {
+		skinSelected += change;
+		if (skinSelected < 0)
+			skinSelected = ClientPrefs.noteSkinArray.length;
+		if (skinSelected > ClientPrefs.noteSkinArray.length)
+			skinSelected = 0;
+			
+		// actually change the skin
+		if (ClientPrefs.noteSkinArray[skinSelected] == 'Arrows') {
+			skin = 'NOTE';
+			ClientPrefs.noteSkin = 'Arrows';
+		} else {
+			skin = ClientPrefs.noteSkinArray[skinSelected];
+			ClientPrefs.noteSkin = skin;
+		}
+		
+		ClientPrefs.noteSkinNum = skinSelected;
+			
+		// updates the strum preview... i think
+		for (i in 0...strumNotes.length) {
+			var item = strumNotes.members[i];
+			item.frames = Paths.getSparrowAtlas('noteskins/' + skin + '_assets');
+			switch(i) {
+				case 0:
+					item.animation.addByPrefix('idle', 'arrowLEFT0');
+				case 1:
+					item.animation.addByPrefix('idle', 'arrowDOWN0');
+				case 2:
+					item.animation.addByPrefix('idle', 'arrowUP0');
+				case 3:
+					item.animation.addByPrefix('idle', 'arrowRIGHT0');
+			}
+			item.animation.play('idle');
+		}
+		
+		// updates the color preview... i think
+		for (i in 0...colorNotes.length) {
+			var item = colorNotes.members[i];
+			item.frames = Paths.getSparrowAtlas('noteskins/' + skin + '_assets');
+			switch(i) {
+				case 0:
+					item.animation.addByPrefix('idle', 'purple0');
+				case 1:
+					item.animation.addByPrefix('idle', 'blue0');
+				case 2:
+					item.animation.addByPrefix('idle', 'green0');
+				case 3:
+					item.animation.addByPrefix('idle', 'red0');
+			}
+			item.animation.play('idle');
+		}
+	}
 }
 
 class ControlsSubstate extends MusicBeatSubstate {
@@ -762,6 +910,7 @@ class PreferencesSubstate extends MusicBeatSubstate
 		'Low Quality',
 		'Anti-Aliasing',
 		'Optimization',
+		'Custom Note Skin',
 		'Persistent Cached Data',
 		#if !html5
 		'Framerate', //Apparently 120FPS isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
@@ -966,6 +1115,9 @@ class PreferencesSubstate extends MusicBeatSubstate
 					case 'Custom Scroll Speed':
 						ClientPrefs.scroll = !ClientPrefs.scroll;
 						
+					case 'Custom Note Skin':
+						ClientPrefs.customNoteSkin = !ClientPrefs.customNoteSkin;
+						
 					case 'Engine Watermarks':
 						ClientPrefs.engineWatermarks = !ClientPrefs.engineWatermarks;
 						
@@ -1087,8 +1239,10 @@ class PreferencesSubstate extends MusicBeatSubstate
 				daText = "If unchecked, you won't get disgusted as frequently.";
 			case 'Custom Scroll Speed'://for Joseph -bbpanzu
 				daText = "Leave unchecked for chart-dependent scroll speed";
+			case 'Custom Note Skin'://for Joseph -bbpanzu
+				daText = "Enables the ability to change note skins.";
 			case 'Scroll Speed':
-				daText = "Arrow speed (Custom must be enabled)";
+				daText = "Change your arrow speed\n(Custom Scroll Speed must be enabled)";
 			case 'Note Size':
 				daText = "Changes the size of your arrows, may help you read them better.";
 			case 'Note Splashes':
@@ -1169,6 +1323,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 						daValue = ClientPrefs.cursing;
 					case 'Custom Scroll Speed':
 						daValue = ClientPrefs.scroll;
+					case 'Custom Note Skin':
+						daValue = ClientPrefs.customNoteSkin;
 					case 'Violence':
 						daValue = ClientPrefs.violence;
 					case 'Camera Zooms':

@@ -29,8 +29,26 @@ class ClientPrefs {
 	public static var hideTime:Bool = false;
 	public static var engineWatermarks:Bool = true;
 	public static var optimization:Bool = false;
+	public static var customNoteSkin:Bool = false;
 	public static var noteSkinNum:Int = 0;
-	public static var noteSkinArray:Array<String> = ['Arrows', 'Circles', 'Squares', 'Diamonds', 'Wii', 'Gloopie', 'Bob', 'Bosip'];
+	public static var noteSkinArray:Array<String> = [
+		'Arrows',
+		'Circles',
+		'Bob',
+		'Bosip',
+		'Gloopie',
+		'Ron'
+		//not all of these are done yet
+		//the shit that is used is above this shit
+		/*'Arrows',
+		'Circles',
+		'Squares',
+		'Diamonds',
+		'Wii', 
+		'Gloopie', 
+		'Bob', 
+		'Bosip'*/
+	];
 	public static var noteSkin:String = 'Arrows';
 	public static var hitSounds:Bool = false;
 	public static var missSounds:Bool = true;
@@ -88,6 +106,7 @@ class ClientPrefs {
 		FlxG.save.data.engineWatermarks = engineWatermarks;
 		FlxG.save.data.hitSounds = hitSounds;
 		FlxG.save.data.missSounds = missSounds;
+		FlxG.save.data.customNoteSkin = customNoteSkin;
 		
 		// note skin shit
 		FlxG.save.data.noteSkinNum = noteSkinNum;
@@ -194,6 +213,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.noteSkin != null) {
 			noteSkin = FlxG.save.data.noteSkin;
+		}
+		if(FlxG.save.data.customNoteSkin != null) {
+			customNoteSkin = FlxG.save.data.customNoteSkin;
 		}
 		
 		// flixel automatically saves your volume!

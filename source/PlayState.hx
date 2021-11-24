@@ -122,6 +122,7 @@ class PlayState extends MusicBeatState
 	public var shits:Int = 0;
 	
 	public static var songSpeed:Float = 0;
+	public static var arrowSkin:String = 'NOTE';
 	
 	public var boyfriendGroup:FlxSpriteGroup;
 	public var dadGroup:FlxSpriteGroup;
@@ -1493,13 +1494,18 @@ class PlayState extends MusicBeatState
 	private function generateSong(dataPath:String):Void
 	{
 		// FlxG.log.add(ChartParser.parse());
-songSpeed = SONG.speed;
-				if(ClientPrefs.scroll) {
-					songSpeed = ClientPrefs.speed;
-				}
+		songSpeed = SONG.speed;
+		if(ClientPrefs.scroll) {
+			songSpeed = ClientPrefs.speed;
+		}
 
-		
-		
+		// sets the arrow skin, with some protection so the arrows don't randomly show up as haxe logos
+		// and crash the game when pressed
+		arrowSkin = 'NOTE_assets';
+		if(SONG.arrowSkin != null) arrowSkin = SONG.arrowSkin;
+		if(ClientPrefs.customNoteSkin) {
+			if(ClientPrefs.noteSkin != 'Arrows') arrowSkin = ClientPrefs.noteSkin + "_assets";
+		}
 		
 		var songData = SONG;
 		Conductor.changeBPM(songData.bpm);
@@ -3428,7 +3434,7 @@ songSpeed = SONG.speed;
 
 		health -= daNote.missHealth; //For testing purposes
 		//trace(daNote.missHealth);
-		songMisses++;
+		if(!daNote.isSustainNote) songMisses++;
 		vocals.volume = 0;
 		RecalculateRating();
 

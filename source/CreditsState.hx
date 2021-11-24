@@ -70,6 +70,7 @@ class CreditsState extends MusicBeatState
 			[''],
 			['Sword Engine Team'],
 			['swordcube',		'swordcube',		'the only dev Lol',					'https://twitter.com/swordcube',	'0xFF6475F3'],
+			['AxyAS',		'axyas',		'helped with note skin menu\nuntil i kinda did it myself',					'https://example.com',	'0xFF6475F3'],
 			[''],
 			['Engine Contributors'],
 			['shubs',				'shubs',			'New Input System Programmer',						'https://twitter.com/yoshubs',			'0xFF4494E6'],
