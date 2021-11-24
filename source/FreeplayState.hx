@@ -43,7 +43,7 @@ class FreeplayState extends MusicBeatState
 	var curSpeed:Float = 1;
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
-	private var curPlaying:Bool = false;
+	var curPlaying:Bool = false;
 
 	private var iconArray:Array<HealthIcon> = [];
 
