@@ -399,8 +399,8 @@ class NotesSubstate extends MusicBeatSubstate
 
 class NoteSkinSubstate extends MusicBeatSubstate
 {
-	private var strumNotesY:Float = 140;
-	private var colorNotesY:Float = 200;
+	private var strumNotesY:Float = 120;
+	private var colorNotesY:Float = 220;
 	private var skinSelected = 0;
 	private var strumNotes:FlxTypedGroup<FlxSprite>;
 	private var colorNotes:FlxTypedGroup<FlxSprite>;
@@ -480,8 +480,8 @@ class NoteSkinSubstate extends MusicBeatSubstate
 		add(skinText);
 		
 		// this basically is the warning that shows if you don't have custom note skin enabled
-		oopsText = new FlxText(50, 600, 1180, "note skin warning", 32);
-		oopsText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		oopsText = new FlxText(50, 600, 1180, "note skin warning", 26);
+		oopsText.setFormat(Paths.font("vcr.ttf"), 26, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		oopsText.scrollFactor.set();
 		oopsText.borderSize = 2.4;
 		add(oopsText);
@@ -509,13 +509,13 @@ class NoteSkinSubstate extends MusicBeatSubstate
 	
 	for (i in 0...strumNotes.length) {
 		var item = strumNotes.members[i];
-		item.x = (145 * i) + 445;
+		item.x = (135 * i) + 405;
 		item.setGraphicSize(Std.int(item.width * 0.8));
 	}
 	
 	for (i in 0...colorNotes.length) {
 		var item = colorNotes.members[i];
-		item.x = (145 * i) + 445;
+		item.x = (135 * i) + 405;
 		item.setGraphicSize(Std.int(item.width * 0.8));
 	}
 	

@@ -24,6 +24,12 @@ class StrumNote extends FlxSprite
 
 		var skin:String = 'NOTE_assets';
 		if(PlayState.arrowSkin != null && PlayState.arrowSkin.length > 1) skin = PlayState.arrowSkin;
+		// bob and bosip like skins have to be hardcoded in, but you have to hardcode a new skin in anyways
+		// sooo
+		switch(ClientPrefs.noteSkin) {
+			case 'Bob' | 'Bosip' | 'Gloopie' | 'Wii':
+				if(player == 1) skin = 'NOTE_assets';
+		}
 
 		if(PlayState.isPixelStage)
 		{

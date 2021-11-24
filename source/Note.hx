@@ -22,6 +22,7 @@ class Note extends FlxSprite
 	public var ignoreNote:Bool = false;
 	public var hitByOpponent:Bool = false;
 	public var noteWasHit:Bool = false;
+	public var isPlayer:Bool = false;
 	public var prevNote:Note;
 
 	public var sustainLength:Float = 0;
@@ -107,7 +108,7 @@ class Note extends FlxSprite
 		return value;
 	}
 
-	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false)
+	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false, ?isPlayer:Bool = false)
 	{
 		super();
 
@@ -117,6 +118,7 @@ class Note extends FlxSprite
 		this.prevNote = prevNote;
 		isSustainNote = sustainNote;
 		this.inEditor = inEditor;
+		this.isPlayer = isPlayer;
 
 		x += (ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X) + 50;
 		// MAKE SURE ITS DEFINITELY OFF SCREEN?
@@ -230,6 +232,11 @@ class Note extends FlxSprite
 			// instead of expecting
 			// WHATEVERCircles_assets
 			// and crashing/freezing the game
+			
+			switch(ClientPrefs.noteSkin) {
+				case 'Bob' | 'Bosip' | 'Gloopie' | 'Wii' | 'Ron':
+					if(isPlayer) skin = 'NOTE_assets';
+			}
 			
 			if(skin == null || skin.length < 1) {
 				skin = 'NOTE_assets';

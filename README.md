@@ -66,10 +66,10 @@ _____________________________________
 
 ## To-do list:
 * [DONE] Note skins in the options menu
-* > [WORKING ON IT] Note skins that only apply to the opponent [Hell]
+* [DONE] Note skins that only apply to the opponent [if this is secretly broken i'm gonna shit myself]
 * [NO PROGRESS YET] Speed feature for songs [Hell, but probably will be a copy paste from leather engine lol]
 * [NO PROGRESS YET] Extra keys [TRUE HELL, MIGHT NOT EVEN BE ADDED LOL]
-* [NO PROGRESS YET]Custom difficulties without source [Hell]
+* [NO PROGRESS YET] Custom difficulties without source [Hell]
 * [NO PROGRESS YET] Skip song & Skip intro in Pause Menu only because fuck Skip Intro being in gameplay
 _____________________________________
 
