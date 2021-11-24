@@ -30,11 +30,13 @@ class FreeplayState extends MusicBeatState
 
 	var scoreBG:FlxSprite;
 	var scoreText:FlxText;
+	var speedText:FlxText;
 	var diffText:FlxText;
 	var lerpScore:Int = 0;
 	var lerpRating:Float = 0;
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
+	var curSpeed:Float = 1;
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
@@ -120,7 +122,7 @@ class FreeplayState extends MusicBeatState
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
 
-		scoreBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(1, 66, 0xFF000000);
+		scoreBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(1, 102, 0xFF000000);
 		scoreBG.alpha = 0.6;
 		add(scoreBG);
 
@@ -129,6 +131,11 @@ class FreeplayState extends MusicBeatState
 		add(diffText);
 
 		add(scoreText);
+		
+		speedText = new FlxText(scoreText.x + 50, diffText.y + 36, 0, "", 32);
+		speedText.font = scoreText.font;
+		speedText.alignment = CENTER;
+		add(speedText);
 
 		if(curSelected >= songs.length) curSelected = 0;
 		bg.color = songs[curSelected].color;
@@ -159,9 +166,9 @@ class FreeplayState extends MusicBeatState
 		textBG.alpha = 0.6;
 		add(textBG);
 		#if PRELOAD_ALL
-		var leText:String = "Press SPACE to listen to this Song / Press RESET to Reset your Score and Accuracy.";
+		var leText:String = "Press SPACE to listen to the song | Press RESET to reset score/accuracy | SHIFT + LEFT & RIGHT to change song speed";
 		#else
-		var leText:String = "Press RESET to Reset your Score and Accuracy.";
+		var leText:String = "Press RESET to reset score/accuracy";
 		#end
 		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, leText, 18);
 		text.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.WHITE, RIGHT);
@@ -215,9 +222,29 @@ class FreeplayState extends MusicBeatState
 
 		scoreText.text = 'PERSONAL BEST: ' + lerpScore + ' (' + Math.floor(lerpRating * 100) + '%)';
 		positionHighscore();
+		
+		curSpeed = FlxMath.roundDecimal(curSpeed, 2);
+		
+		#if !sys
+		curSpeed = 1;
+		#end
+		
+		if(curSpeed < 0.5)
+			curSpeed = 0.5;
+			
+		#if sys
+		speedText.text = "Speed: " + curSpeed + " (R+SHIFT)";
+		#else
+		speedText.text = "";
+		#end
+		
+		speedText.x = scoreText.x + (scoreText.width / 2) - (speedText.width / 2);
 
 		var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
+		var leftP = controls.UI_LEFT_P;
+		var rightP = controls.UI_RIGHT_P;
+		var shift = FlxG.keys.pressed.SHIFT;
 		var accepted = controls.ACCEPT;
 		var space = FlxG.keys.justPressed.SPACE;
 
@@ -233,10 +260,56 @@ class FreeplayState extends MusicBeatState
 			changeSelection(shiftMult);
 		}
 
-		if (controls.UI_LEFT_P)
+		if (leftP & !shift)
 			changeDiff(-1);
-		if (controls.UI_RIGHT_P)
+		else if (leftP && shift)
+		{
+				curSpeed -= 0.05;
+
+				#if cpp
+				@:privateAccess
+				{
+					if(FlxG.sound.music.active && FlxG.sound.music.playing)
+						lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, curSpeed);
+		
+					if (vocals.playing)
+						lime.media.openal.AL.sourcef(vocals._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, curSpeed);
+				}
+				#end
+		}
+		if (rightP & !shift)
 			changeDiff(1);
+		else if (rightP && shift)
+		{
+				curSpeed += 0.05;
+
+				#if cpp
+				@:privateAccess
+				{
+					if(FlxG.sound.music.active && FlxG.sound.music.playing)
+						lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, curSpeed);
+		
+					if (vocals.playing)
+						lime.media.openal.AL.sourcef(vocals._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, curSpeed);
+				}
+				#end
+		}
+		
+		if(FlxG.keys.justPressed.R  && shift)
+		{
+			curSpeed = 1;
+
+			#if cpp
+			@:privateAccess
+			{
+				if(FlxG.sound.music.active && FlxG.sound.music.playing)
+					lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, curSpeed);
+	
+				if (vocals.playing)
+					lime.media.openal.AL.sourcef(vocals._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, curSpeed);
+			}
+			#end
+		}
 
 		if (controls.BACK)
 		{

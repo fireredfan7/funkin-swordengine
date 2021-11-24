@@ -32,7 +32,7 @@ class Conductor
 	{
 	}
 
-	public static function mapBPMChanges(song:SwagSong)
+	public static function mapBPMChanges(song:SwagSong, ?songMultiplier:Float = 1.0)
 	{
 		bpmChangeMap = [];
 
@@ -57,13 +57,34 @@ class Conductor
 			totalPos += ((60 / curBPM) * 1000 / 4) * deltaSteps;
 		}
 		trace("new BPM map BUDDY " + bpmChangeMap);
+		
+		recalculateStuff(songMultiplier);
 	}
 
-	public static function changeBPM(newBpm:Float)
+	public static function changeBPM(newBpm:Float, ?multi:Float = 1)
 	{
 		bpm = newBpm;
 
+		recalculateStuff(multi);
+	}
+	
+
+	public static function recalculateStuff(?multi:Float = 1)
+	{
+		safeZoneOffset = Math.floor((safeFrames / 60) * 1000) * multi;
+
 		crochet = ((60 / bpm) * 1000);
 		stepCrochet = crochet / 4;
+
+		if(multi != 1)
+		{
+			nonmultilmao_crochet = ((60 / bpm) * 1000);
+			nonmultilmao_stepCrochet = nonmultilmao_crochet / 4;
+		}
+		else
+		{
+			nonmultilmao_crochet = crochet;
+			nonmultilmao_stepCrochet = stepCrochet;
+		}
 	}
 }
