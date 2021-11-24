@@ -25,6 +25,9 @@ class Conductor
 
 	public static var safeFrames:Int = 10;
 	public static var safeZoneOffset:Float = (safeFrames / 60) * 1000; // is calculated in create(), is safeFrames in milliseconds
+	
+	public static var nonmultilmao_crochet:Float = ((60 / bpm) * 1000); // beats in milliseconds
+	public static var nonmultilmao_stepCrochet:Float = nonmultilmao_crochet / 4; // steps in milliseconds
 
 	public static var bpmChangeMap:Array<BPMChangeEvent> = [];
 

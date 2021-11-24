@@ -66,8 +66,9 @@ _____________________________________
 
 ## To-do list:
 * [DONE] Note skins in the options menu
-* [DONE] Note skins that only apply to the opponent [if this is secretly broken i'm gonna shit myself]
-* > [WORKING ON IT] Speed feature for songs [Hell, but probably will be a copy paste from leather engine lol]
+* [DONE] Note skins that only apply to the opponent
+* > [WORKS WITH ISSUES] Speed feature for songs [Songs don't end properly if the speed is changed period.]
+* This issue will be fixed soon hopefully.
 * [NO PROGRESS YET] Custom difficulties without source [Hell]
 * [NO PROGRESS YET] Skip song & Skip intro in Pause Menu only because fuck Skip Intro being in gameplay
 * [NO PROGRESS YET] Extra keys [TRUE HELL, MIGHT NOT EVEN BE ADDED LOL]

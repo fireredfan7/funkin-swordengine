@@ -14,8 +14,12 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import lime.utils.Assets;
+import lime.app.Application;
+import lime.media.openal.AL;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
+import openfl.utils.Future;
+import openfl.media.Sound;
 import WeekData;
 
 using StringTools;
@@ -132,7 +136,7 @@ class FreeplayState extends MusicBeatState
 
 		add(scoreText);
 		
-		speedText = new FlxText(scoreText.x + 50, diffText.y + 36, 0, "", 32);
+		speedText = new FlxText(scoreText.x + 50, diffText.y + 36, 0, "", 24);
 		speedText.font = scoreText.font;
 		speedText.alignment = CENTER;
 		add(speedText);
@@ -232,6 +236,9 @@ class FreeplayState extends MusicBeatState
 		if(curSpeed < 0.5)
 			curSpeed = 0.5;
 			
+		if(curSpeed > 10)
+			curSpeed = 10;
+			
 		#if sys
 		speedText.text = "Speed: " + curSpeed + " (R+SHIFT)";
 		#else
@@ -260,52 +267,52 @@ class FreeplayState extends MusicBeatState
 			changeSelection(shiftMult);
 		}
 
-		if (leftP & !shift)
+		if (controls.UI_LEFT_P && !FlxG.keys.pressed.SHIFT)
 			changeDiff(-1);
-		else if (leftP && shift)
+		else if (controls.UI_LEFT_P && FlxG.keys.pressed.SHIFT)
 		{
 				curSpeed -= 0.05;
 
 				#if cpp
 				@:privateAccess
 				{
-					if(FlxG.sound.music.active && FlxG.sound.music.playing)
+					if(FlxG.sound.music.active && FlxG.sound.music.playing && curPlaying)
 						lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, curSpeed);
 		
-					if (vocals.playing)
+					if (vocals.playing && curPlaying)
 						lime.media.openal.AL.sourcef(vocals._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, curSpeed);
 				}
 				#end
 		}
-		if (rightP & !shift)
+		if (controls.UI_RIGHT_P && !FlxG.keys.pressed.SHIFT)
 			changeDiff(1);
-		else if (rightP && shift)
+		else if (controls.UI_RIGHT_P && FlxG.keys.pressed.SHIFT)
 		{
 				curSpeed += 0.05;
 
 				#if cpp
 				@:privateAccess
 				{
-					if(FlxG.sound.music.active && FlxG.sound.music.playing)
+					if(FlxG.sound.music.active && FlxG.sound.music.playing && curPlaying)
 						lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, curSpeed);
 		
-					if (vocals.playing)
+					if (vocals.playing && curPlaying)
 						lime.media.openal.AL.sourcef(vocals._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, curSpeed);
 				}
 				#end
 		}
 		
-		if(FlxG.keys.justPressed.R  && shift)
+		if(FlxG.keys.justPressed.R && shift)
 		{
 			curSpeed = 1;
 
 			#if cpp
 			@:privateAccess
 			{
-				if(FlxG.sound.music.active && FlxG.sound.music.playing)
+				if(FlxG.sound.music.active && FlxG.sound.music.playing && curPlaying)
 					lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, curSpeed);
 	
-				if (vocals.playing)
+				if (vocals.playing && curPlaying)
 					lime.media.openal.AL.sourcef(vocals._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, curSpeed);
 			}
 			#end
@@ -324,6 +331,7 @@ class FreeplayState extends MusicBeatState
 		if(space && instPlaying != curSelected)
 		{
 			destroyFreeplayVocals();
+			curPlaying = true;
 			Paths.currentModDirectory = songs[curSelected].folder;
 			var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
 			PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
@@ -339,6 +347,17 @@ class FreeplayState extends MusicBeatState
 			vocals.looped = true;
 			vocals.volume = 0.7;
 			instPlaying = curSelected;
+			
+			#if cpp
+			@:privateAccess
+			{
+			if(FlxG.sound.music.active && FlxG.sound.music.playing && curPlaying)
+				lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, curSpeed);
+
+			if (vocals.playing && curPlaying)
+				lime.media.openal.AL.sourcef(vocals._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, curSpeed);
+			}
+			#end
 		}
 		else #end if (accepted)
 		{
@@ -358,6 +377,7 @@ class FreeplayState extends MusicBeatState
 			PlayState.SONG = Song.loadFromJson(poop, songLowercase);
 			PlayState.isStoryMode = false;
 			PlayState.storyDifficulty = curDifficulty;
+			PlayState.songMultiplier = curSpeed;
 
 			PlayState.storyWeek = songs[curSelected].week;
 			trace('CURRENT WEEK: ' + WeekData.getWeekFileName());

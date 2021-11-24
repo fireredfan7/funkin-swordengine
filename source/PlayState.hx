@@ -38,10 +38,14 @@ import flixel.util.FlxStringUtil;
 import flixel.util.FlxTimer;
 import haxe.Json;
 import lime.utils.Assets;
+import lime.app.Application;
+import lime.media.openal.AL;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
 import openfl.utils.Assets as OpenFlAssets;
+import openfl.utils.Future;
+import openfl.media.Sound;
 import editors.ChartingState;
 import editors.CharacterEditorState;
 import flixel.group.FlxSpriteGroup;
@@ -133,6 +137,7 @@ class PlayState extends MusicBeatState
 	public static var SONG:SwagSong = null;
 	public static var isStoryMode:Bool = false;
 	public static var songMultiplier:Float = 1;
+	public static var previousScrollSpeedLmao:Float = 0;
 	public static var storyWeek:Int = 0;
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
@@ -178,6 +183,7 @@ class PlayState extends MusicBeatState
 	private var generatedMusic:Bool = false;
 	public var endingSong:Bool = false;
 	private var startingSong:Bool = false;
+	public var songStarted:Bool = false;
 	private var updateTime:Bool = false;
 	public static var practiceMode:Bool = false;
 	public static var usedPractice:Bool = false;
@@ -248,6 +254,7 @@ class PlayState extends MusicBeatState
 
 	public var inCutscene:Bool = false;
 	var songLength:Float = 0;
+	var songLength2:Float = 0;
 
 	#if desktop
 	// Discord RPC variables
@@ -1469,12 +1476,15 @@ class PlayState extends MusicBeatState
 	function startSong():Void
 	{
 		startingSong = false;
+		songStarted = true;
 
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
 
 		FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 		FlxG.sound.music.onComplete = finishSong;
+		//songs end HELLA early when slowed down and fuck up when sped up
+		//i'ma fix this shit tomorrow it's like 6am i'm tird
 		vocals.play();
 
 		if(paused) {
@@ -1485,6 +1495,11 @@ class PlayState extends MusicBeatState
 
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
+		songLength2 = ((FlxG.sound.music.length / songMultiplier) / 1000);
+		
+		Conductor.recalculateStuff(songMultiplier);
+		resyncVocals();
+		
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		
@@ -1866,10 +1881,12 @@ class PlayState extends MusicBeatState
 		if(finishTimer != null) return;
 
 		vocals.pause();
-
-		FlxG.sound.music.play();
+		FlxG.sound.music.pause();
+		
 		Conductor.songPosition = FlxG.sound.music.time;
 		vocals.time = Conductor.songPosition;
+		
+		FlxG.sound.music.play();
 		vocals.play();
 		
 		#if cpp
@@ -2138,14 +2155,14 @@ class PlayState extends MusicBeatState
 		{
 			if (startedCountdown)
 			{
-				Conductor.songPosition += (FlxG.elapsed * 1000) * songMultiplier;
+				Conductor.songPosition += (FlxG.elapsed * 1000);
 				if (Conductor.songPosition >= 0)
 					startSong();
 			}
 		}
 		else
 		{
-			Conductor.songPosition += FlxG.elapsed * 1000;
+			Conductor.songPosition += (FlxG.elapsed * 1000) * songMultiplier;
 
 			if (!paused)
 			{
@@ -2175,6 +2192,12 @@ class PlayState extends MusicBeatState
 
 			// Conductor.lastSongPos = FlxG.sound.music.time;
 		}
+		
+		// comment this out if no work
+		
+		// yeah no fuck this i'm doing this tomorrow
+			
+		// comment this out if no work
 
 		if (camZooming)
 		{
@@ -3867,10 +3890,8 @@ class PlayState extends MusicBeatState
 		
 		var gamerValue = 20 * songMultiplier;
 		
-		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
-		{
+		if (FlxG.sound.music.time > Conductor.songPosition + gamerValue || FlxG.sound.music.time < Conductor.songPosition - gamerValue || FlxG.sound.music.time < 500 && (FlxG.sound.music.time > Conductor.songPosition + 5 || FlxG.sound.music.time < Conductor.songPosition - 5))
 			resyncVocals();
-		}
 
 		if(curStep == lastStepHit) {
 			return;
