@@ -234,15 +234,21 @@ class Note extends FlxSprite
 			// and crashing/freezing the game
 				
 				
-			// add your skin to the case if you want the player arrows
-			// to be fnf arrows.
-			
-			// ALSO REMEMBER TO ADD "_assets" UNDER YOUR SKIN NAME HERE
-			// AND REMEMBER TO DO THIS IN STRUMNOTE.HX
+			// IF YOU WANT YOUR NOTE SKIN TO HAVE CUSTOM NOTES FOR BOTH SIDES
+			// (opponent - yourskin1)
+			// (player - yourskin2)
+			// ADD A NEW CASE LIKE THIS:
+			//	case 'YOURSKINNAME_assets':
+			//		if(isPlayer) skin = 'SKINFORBF_assets';
+			// OTHERWISE DO THIS:
+			//	case 'YOURSKINNAME_assets':
+			//		if(isPlayer) skin = 'NOTE_assets';
 		
 			switch(skin) {
 				case 'Bob_assets' | 'Bosip_assets' | 'Gloopie_assets' | 'Ron_assets':
-					if(isPlayer) skin = 'NOTE_assets';
+					if(isPlayer) skin = 'BfExpansion_assets';
+				case 'Wii_assets':
+					if(isPlayer) skin = 'BfWii_assets';
 			}
 			
 			if(skin == null || skin.length < 1) {

@@ -71,7 +71,7 @@ class CreditsState extends MusicBeatState
 			['Sword Engine Team'],
 			['swordcube',		'swordcube',		'the only dev Lol',					'https://twitter.com/swordcube',	'0xFF6475F3'],
 			['AxyAS',		'axyas',		'helped with note skin menu\nuntil i kinda did it myself',					'https://no.com',	'0xFFD9D9D9'],
-			['Vienna',		'vienna',		'added wii notes',					'https://twitter.com/MarcyRoseX',	'0xFFE6B04C'],
+			['Vienna',		'vienna',		'Added Wii Notes and made it so the Bob/Bosip/Gloopie/Ron\nnotes use the B&B bf arrows for the player.',					'https://twitter.com/MarcyRoseX',	'0xFFE6B04C'],
 			['Raf',		'raf',		'helped me with getting the actions tab to work\nthank this man',					'https://github.com/RafaelGiacom',	'0xFF38261B'],
 			['Amogus',		'amogus',		'being sus',					'https://www.youtube.com/watch?v=ub82Xb1C8os',	'0xFFFF3333'],
 			[''],
