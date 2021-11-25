@@ -126,7 +126,7 @@ class PlayState extends MusicBeatState
 	public var shits:Int = 0;
 	
 	public static var songSpeed:Float = 0;
-	public static var arrowSkin:String = 'NOTE';
+	public static var arrowSkin:String = 'NOTE_assets';
 	
 	public var boyfriendGroup:FlxSpriteGroup;
 	public var dadGroup:FlxSpriteGroup;
@@ -1536,10 +1536,10 @@ class PlayState extends MusicBeatState
 		// sets the arrow skin, with some protection so the arrows don't randomly show up as haxe logos
 		// and crash the game when pressed
 		arrowSkin = 'NOTE_assets';
-		if(SONG.arrowSkin != null) arrowSkin = SONG.arrowSkin;
 		if(ClientPrefs.customNoteSkin) {
 			if(ClientPrefs.noteSkin != 'Arrows') arrowSkin = ClientPrefs.noteSkin + "_assets";
 		}
+		if(SONG.arrowSkin != null && SONG.arrowSkin != 'NOTE_assets') arrowSkin = SONG.arrowSkin;
 		
 		var songData = SONG;
 		Conductor.changeBPM(songData.bpm, songMultiplier);
