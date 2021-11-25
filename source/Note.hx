@@ -242,7 +242,7 @@ class Note extends FlxSprite
 		
 			switch(skin) {
 				case 'Bob_assets' | 'Bosip_assets' | 'Gloopie_assets' | 'Ron_assets':
-					if(player == 1) skin = 'NOTE_assets';
+					if(isPlayer) skin = 'NOTE_assets';
 			}
 			
 			if(skin == null || skin.length < 1) {
