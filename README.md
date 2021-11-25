@@ -25,7 +25,7 @@ You can do this with: `haxelib install linc_luajit` on a Command prompt/PowerShe
 At the top, click the "Actions" tab
 
 <a>
-  <img align="left" height="720" alt="image" src="https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloading-actions-tab/image1.png" />
+  <img align="left" alt="image" src="https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloading-actions-tab/image1.png" />
 </a>
 
 Afterwards, You should see this:
@@ -33,7 +33,7 @@ Afterwards, You should see this:
 Click the top item ***WITH THE CHECKMARK***.
 
 <a>
-  <img align="left" height="720" alt="image" src="https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloading-actions-tab/image2.png" />
+  <img align="left" alt="image" src="https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloading-actions-tab/image2.png" />
 </a>
 
 You should see something like this afterwards:
@@ -45,7 +45,7 @@ And download **linuxBuild** or **windowsBuild**, 64-bit only.
 For Mac users, download the **windowsBuild** and use Wine to open it.
 
 <a>
-  <img align="left" height="720" alt="image" src="https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloading-actions-tab/image3.png" />
+  <img align="left" alt="image" src="https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloading-actions-tab/image3.png" />
 </a>
 
 ### Releases Tab
