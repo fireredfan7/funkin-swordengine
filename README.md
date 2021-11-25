@@ -28,6 +28,8 @@ At the top, click the "Actions" tab
   <img align="left" alt="image" src="https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloading-actions-tab/image1.png" />
 </a>
 
+
+
 Afterwards, You should see this:
 
 Click the top item ***WITH THE CHECKMARK***.
