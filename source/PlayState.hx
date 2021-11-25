@@ -2076,7 +2076,7 @@ class PlayState extends MusicBeatState
 		accuracyNum = ratingPercent * 100;
 		
 		if(ratingString == '?') {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: 0%' + ' | Rating: N/A (FC)';
+			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: 0%' + ' | Rating: N/A';
 		} else{
 			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ' + Math.floor(accuracyNum * 100) / 100 + '% | Rating: ' + ratingString + ' (' + ratingString2 + ')';
 		}
