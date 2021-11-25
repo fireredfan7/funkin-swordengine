@@ -31,6 +31,8 @@ class ClientPrefs {
 	public static var optimization:Bool = false;
 	public static var customNoteSkin:Bool = false;
 	public static var noteSkinNum:Int = 0;
+	public static var underlayVisible:Bool = false;
+	public static var laneTransparency:Float = 0.7;
 	public static var noteSkinArray:Array<String> = [
 		'Arrows',
 		'Circles',
@@ -108,12 +110,14 @@ class ClientPrefs {
 		FlxG.save.data.hitSounds = hitSounds;
 		FlxG.save.data.missSounds = missSounds;
 		FlxG.save.data.customNoteSkin = customNoteSkin;
+		FlxG.save.data.laneTransparency = laneTransparency;
+		FlxG.save.data.underlayVisible = underlayVisible;
 		
 		// note skin shit
 		FlxG.save.data.noteSkinNum = noteSkinNum;
 		FlxG.save.data.noteSkin = noteSkin;
 		
-		// flush the got damn shit idfk what this does i don't know haxe
+		// save the got damn shit
 		FlxG.save.flush();
 
 		var save:FlxSave = new FlxSave();
@@ -206,6 +210,12 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.optimization != null) {
 			missSounds = FlxG.save.data.missSounds;
+		}
+		if(FlxG.save.data.laneTransparency != null) {
+			laneTransparency = FlxG.save.data.laneTransparency;
+		}
+		if(FlxG.save.data.underlayVisible != null) {
+			underlayVisible = FlxG.save.data.underlayVisible;
 		}
 		
 		// note skin shit

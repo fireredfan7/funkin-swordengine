@@ -905,7 +905,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 		'Framerate',
 		'Note Delay',
 		'Scroll Speed',
-		'Note Size'
+		'Note Size',
+		'Underlay Opacity'
 	];
 
 	static var options:Array<String> = [
@@ -927,6 +928,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 		'Note Size',
 		'Custom Scroll Speed',
 		'Scroll Speed',
+		'Arrow Underlay',
+		'Underlay Opacity',
 		'Hit Sounds',
 		'Miss Sounds',
 		'Engine Watermarks',
@@ -1139,6 +1142,9 @@ class PreferencesSubstate extends MusicBeatSubstate
 					
 					case 'Hide Song Length':
 						ClientPrefs.hideTime = !ClientPrefs.hideTime;
+						
+					case 'Arrow Underlay':
+						ClientPrefs.underlayVisible = !ClientPrefs.underlayVisible;
 				}
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				reloadValues();
@@ -1164,6 +1170,11 @@ class PreferencesSubstate extends MusicBeatSubstate
 						ClientPrefs.speed += add/10;
 						if(ClientPrefs.speed < 0.5) ClientPrefs.speed = 0.5;
 						else if(ClientPrefs.speed > 4) ClientPrefs.speed = 4;
+						
+					case 'Underlay Opacity':
+						ClientPrefs.laneTransparency += add/20;
+						if(ClientPrefs.laneTransparency < 0) ClientPrefs.laneTransparency = 0;
+						else if(ClientPrefs.laneTransparency > 1) ClientPrefs.laneTransparency = 1;
 
 					case 'Note Size':
 						ClientPrefs.noteSize += add/20;
@@ -1258,6 +1269,10 @@ class PreferencesSubstate extends MusicBeatSubstate
 				daText = "If checked, hides most HUD elements.";
 			case 'Hide Song Length':
 				daText = "If checked, the bar showing how much time is left\nwill be hidden.";
+			case 'Arrow Underlay':
+				daText = "If checked, a black box will go behind the arrows.\nUse Underlay Opacity to change how visible it is.";
+			case 'Underlay Opacity':
+				daText = "Change how visible your arrow underlay is. (Arrow Underlay must be enabled)";
 		}
 		descText.text = daText;
 
@@ -1342,6 +1357,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 						daValue = ClientPrefs.engineWatermarks;
 					case 'Optimization':
 						daValue = ClientPrefs.optimization;
+					case 'Arrow Underlay':
+						daValue = ClientPrefs.underlayVisible;
 				}
 				checkbox.daValue = daValue;
 			}
@@ -1360,6 +1377,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 						if (ClientPrefs.noteSize == 0.7) daText += "(Default)";
 					case 'Scroll Speed':
 						daText = ClientPrefs.speed+"";
+					case 'Underlay Opacity':
+						daText = FlxStringUtil.formatMoney(ClientPrefs.laneTransparency)+"";
 				}
 				var lastTracker:FlxSprite = text.sprTracker;
 				text.sprTracker = null;

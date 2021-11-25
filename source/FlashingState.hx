@@ -24,8 +24,8 @@ class FlashingState extends MusicBeatState
 		add(bg);
 
 		warnText = new FlxText(0, 0, FlxG.width,
-			"A warning to all:\n
-			This mod may contain flashing lights.\n
+			"This mod may contain flashing lights and\n
+			cause epileptic seizures & other issues.\n
 			Press ENTER to disable them now or go to the Options Menu.\n
 			Press ESCAPE to ignore this message.\n
 			You've been warned!",

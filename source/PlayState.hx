@@ -170,6 +170,10 @@ class PlayState extends MusicBeatState
 	private var curSong:String = "";
 
 	public var gfSpeed:Int = 1;
+	
+	public var laneunderlay:FlxSprite;
+	public var laneunderlayOpponent:FlxSprite;
+	
 	public var health:Float = 1;
 	public var combo:Int = 0;
 
@@ -807,6 +811,19 @@ class PlayState extends MusicBeatState
 		strumLine = new FlxSprite(ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X, 50).makeGraphic(FlxG.width, 10);
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
+		
+		laneunderlayOpponent = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
+		laneunderlayOpponent.alpha = ClientPrefs.laneTransparency;
+		laneunderlayOpponent.color = FlxColor.BLACK;
+		laneunderlayOpponent.scrollFactor.set();
+		
+		laneunderlay = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
+		laneunderlay.alpha = ClientPrefs.laneTransparency;
+		laneunderlay.color = FlxColor.BLACK;
+		laneunderlay.scrollFactor.set();
+		
+		if(!ClientPrefs.optimization && ClientPrefs.underlayVisible && !ClientPrefs.middleScroll) add(laneunderlayOpponent);
+		if(!ClientPrefs.optimization && ClientPrefs.underlayVisible) add(laneunderlay);
 
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 20, 400, "", 32);
 		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -947,6 +964,8 @@ class PlayState extends MusicBeatState
 			botplayTxt.y = timeBarBG.y - 78;
 		}
 
+		laneunderlay.cameras = [camHUD];
+		laneunderlayOpponent.cameras = [camHUD];
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
@@ -1324,6 +1343,12 @@ class PlayState extends MusicBeatState
 				setOnLuas('defaultOpponentStrumY' + i, opponentStrums.members[i].y);
 				if(ClientPrefs.middleScroll) opponentStrums.members[i].visible = false;
 			}
+			
+			laneunderlay.x = playerStrums.members[0].x - 25;
+			laneunderlayOpponent.x = opponentStrums.members[0].x - 25;
+
+			laneunderlay.screenCenter(Y);
+			laneunderlayOpponent.screenCenter(Y);
 
 			startedCountdown = true;
 			Conductor.songPosition = 0;
