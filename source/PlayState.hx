@@ -316,6 +316,9 @@ class PlayState extends MusicBeatState
 
 		Conductor.mapBPMChanges(SONG, songMultiplier);
 		Conductor.changeBPM(SONG.bpm, songMultiplier);
+		
+		Conductor.recalculateStuff(songMultiplier);
+		Conductor.safeZoneOffset *= songMultiplier;
 
 		#if desktop
 		storyDifficultyText = '' + CoolUtil.difficultyStuff[storyDifficulty][0];
