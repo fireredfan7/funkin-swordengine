@@ -20,7 +20,43 @@ You can do this with: `haxelib install linc_luajit` on a Command prompt/PowerShe
 ...Or if you don't want your mod to be able to run .lua scripts (why), delete the "LUA_ALLOWED" line on Project.xml
 
 ## Downloading:
-Go to the releases tab lol
+### Actions Tab [Contains Latest Builds]
+
+At the top, click the "Actions" tab
+
+<a>
+  <img align="left" alt="image" src="https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloading-actions-tab/image1.png" />
+</a>
+
+
+
+Afterwards, You should see this:
+
+Click the top item ***WITH THE CHECKMARK***.
+
+<a>
+  <img align="left" alt="image" src="https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloading-actions-tab/image2.png" />
+</a>
+
+You should see something like this afterwards:
+
+Scroll down until you see "Artifacts"
+
+And download **linuxBuild** or **windowsBuild**, 64-bit only.
+
+For Mac users, download the **windowsBuild** and use Wine to open it.
+
+<a>
+  <img align="left" alt="image" src="https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloading-actions-tab/image3.png" />
+</a>
+
+### Releases Tab
+
+you can't download from here since there's no stable release, your only ways to download SE is:
+
+* 1 - Get the source code and compile
+* 2 - Get it from the actions tab, Which is precompiled.
+_____________________________________
 
 # Psych Engine Credits
 
