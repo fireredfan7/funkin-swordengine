@@ -73,6 +73,7 @@ class CreditsState extends MusicBeatState
 			['AxyAS',		'axyas',		'helped with note skin menu\nuntil i kinda did it myself',					'https://no.com',	'0xFFD9D9D9'],
 			['Vienna',		'vienna',		'added wii notes',					'https://twitter.com/MarcyRoseX',	'0xFFE6B04C'],
 			['Raf',		'raf',		'helped me with getting the actions tab to work\nthank this man',					'https://github.com/RafaelGiacom',	'0xFF38261B'],
+			['Amogus',		'amogus',		'being sus',					'https://sussybaka.com',	'0xFFFF3333'],
 			[''],
 			['Engine Contributors'],
 			['shubs',				'shubs',			'New Input System Programmer',						'https://twitter.com/yoshubs',			'0xFF4494E6'],
