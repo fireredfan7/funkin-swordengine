@@ -232,10 +232,17 @@ class Note extends FlxSprite
 			// instead of expecting
 			// WHATEVERCircles_assets
 			// and crashing/freezing the game
+				
+				
+			// add your skin to the case if you want the player arrows
+			// to be fnf arrows.
 			
-			switch(ClientPrefs.noteSkin) {
-				case 'Bob' | 'Bosip' | 'Gloopie' | 'Ron':
-					if(isPlayer) skin = 'NOTE_assets';
+			// ALSO REMEMBER TO ADD "_assets" UNDER YOUR SKIN NAME HERE
+			// AND REMEMBER TO DO THIS IN STRUMNOTE.HX
+		
+			switch(skin) {
+				case 'Bob_assets' | 'Bosip_assets' | 'Gloopie_assets' | 'Ron_assets':
+					if(player == 1) skin = 'NOTE_assets';
 			}
 			
 			if(skin == null || skin.length < 1) {

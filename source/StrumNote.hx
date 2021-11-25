@@ -26,8 +26,14 @@ class StrumNote extends FlxSprite
 		if(PlayState.arrowSkin != null && PlayState.arrowSkin.length > 1) skin = PlayState.arrowSkin;
 		// bob and bosip like skins have to be hardcoded in, but you have to hardcode a new skin in anyways
 		// sooo
-		switch(ClientPrefs.noteSkin) {
-			case 'Bob' | 'Bosip' | 'Gloopie' | 'Ron':
+		
+		// add your skin to the case if you want the player arrows
+		// to be fnf arrows.
+		
+		// ALSO REMEMBER TO ADD "_assets" UNDER YOUR SKIN NAME HERE
+		// AND REMEMBER TO DO THIS IN NOTE.HX
+		switch(skin) {
+			case 'Bob_assets' | 'Bosip_assets' | 'Gloopie_assets' | 'Ron_assets':
 				if(player == 1) skin = 'NOTE_assets';
 		}
 
