@@ -23,15 +23,21 @@ You can do this with: `haxelib install linc_luajit` on a Command prompt/PowerShe
 ### Actions Tab [Contains Latest Builds]
 
 At the top, click the "Actions" tab
+
 https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloading-actions-tab/image1.png?raw=true
 
 Afterwards, You should see this:
+
 Click the top item ***WITH THE CHECKMARK***.
+
 https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloading-actions-tab/image2.png?raw=true
 
 You should see something like this afterwards:
+
 Scroll down until you see "Artifacts"
+
 And download **linuxBuild** or **windowsBuild**, 64-bit only.
+
 For Mac users, download the **windowsBuild** and use Wine to open it.
 
 https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloading-actions-tab/image3.png?raw=true
@@ -39,8 +45,9 @@ https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloadin
 ### Releases Tab
 
 you can't download from here since there's no stable release, your only ways to download SE is:
-1 - Get the source code and compile
-2 - Get it from the actions tab, Which is precompiled.
+
+* 1 - Get the source code and compile
+* 2 - Get it from the actions tab, Which is precompiled.
 _____________________________________
 
 # Psych Engine Credits
