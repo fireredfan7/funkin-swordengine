@@ -234,7 +234,7 @@ class Note extends FlxSprite
 			// and crashing/freezing the game
 			
 			switch(ClientPrefs.noteSkin) {
-				case 'Bob' | 'Bosip' | 'Gloopie' | 'Wii' | 'Ron':
+				case 'Bob' | 'Bosip' | 'Gloopie' | 'Ron':
 					if(isPlayer) skin = 'NOTE_assets';
 			}
 			

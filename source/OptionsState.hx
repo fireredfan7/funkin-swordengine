@@ -1225,7 +1225,7 @@ class PreferencesSubstate extends MusicBeatSubstate
 			case 'Engine Watermarks':
 				daText = "If unchecked, Watermarks from the engine will no longer show up.";
 			case 'Optimization':
-				daText = "If checked, This will remove most background elements and remove characters.\nHelps with performance and focus. Currently does NOTHING yet.";
+				daText = "If checked, This will remove most background elements and remove characters.\nHelps with performance and focus.";
 			case 'Downscroll':
 				daText = "If checked, notes go Down instead of Up, simple enough.";
 			case 'Hit Sounds':

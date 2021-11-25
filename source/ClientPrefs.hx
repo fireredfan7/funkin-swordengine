@@ -36,8 +36,9 @@ class ClientPrefs {
 		'Circles',
 		'Bob',
 		'Bosip',
+		'Wii',
 		'Gloopie',
-		'Ron'
+		'Ron',
 		//not all of these are done yet
 		//the shit that is used is above this shit
 		/*'Arrows',

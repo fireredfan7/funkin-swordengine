@@ -27,7 +27,7 @@ class StrumNote extends FlxSprite
 		// bob and bosip like skins have to be hardcoded in, but you have to hardcode a new skin in anyways
 		// sooo
 		switch(ClientPrefs.noteSkin) {
-			case 'Bob' | 'Bosip' | 'Gloopie' | 'Wii' | 'Ron':
+			case 'Bob' | 'Bosip' | 'Gloopie' | 'Ron':
 				if(player == 1) skin = 'NOTE_assets';
 		}
 
