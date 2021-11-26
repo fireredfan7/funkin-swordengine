@@ -1549,14 +1549,15 @@ class PlayState extends MusicBeatState
 		
 		previousScrollSpeedLmao = SONG.speed;
 		
-		SONG.speed /= songMultiplier;
-		
 		if(SONG.speed < 1)
 			SONG.speed = 1;
 			
 		if(ClientPrefs.scroll) {
 			songSpeed = ClientPrefs.speed;
 		}
+		
+		SONG.speed /= songMultiplier;
+		songSpeed /= songMultiplier;
 
 		// sets the arrow skin, with some protection so the arrows don't randomly show up as haxe logos
 		// and crash the game when pressed
