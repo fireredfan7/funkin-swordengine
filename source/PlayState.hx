@@ -1510,7 +1510,7 @@ class PlayState extends MusicBeatState
 		lastReportedPlayheadPosition = 0;
 
 		FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
-		FlxG.sound.music.onComplete = finishSong;
+		//FlxG.sound.music.onComplete = finishSong;
 		//songs end HELLA early when slowed down and fuck up when sped up
 		//i'ma fix this shit tomorrow it's like 6am i'm tird
 		vocals.play();
@@ -2224,7 +2224,26 @@ class PlayState extends MusicBeatState
 		
 		// comment this out if no work
 		
-		// yeah no fuck this i'm doing this tomorrow
+		// WIFI GAMING SOCK
+		
+		if (generatedMusic)
+		{
+			if (songStarted && !endingSong)
+			{
+				// Song ends abruptly on slow rate even with second condition being deleted,
+				// and if it's deleted on songs like cocoa then it would end without finishing instrumental fully,
+				// so no reason to delete it at all
+				if (unspawnNotes.length == 0 && notes.length == 0 && FlxG.sound.music.time / songMultiplier > (songLength - 100))
+				{
+
+					endingSong = true;
+					new FlxTimer().start(2, function(timer)
+					{
+						finishSong();
+					});
+				}
+			}
+		}
 			
 		// comment this out if no work
 
