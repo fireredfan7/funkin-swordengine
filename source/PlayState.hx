@@ -1523,7 +1523,7 @@ class PlayState extends MusicBeatState
 
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
-		songLength2 = ((FlxG.sound.music.length / songMultiplier) / 1000);
+		songLength2 = FlxG.sound.music.length / songMultiplier;
 		
 		Conductor.recalculateStuff(songMultiplier);
 		resyncVocals();
@@ -1556,7 +1556,6 @@ class PlayState extends MusicBeatState
 			songSpeed = ClientPrefs.speed;
 		}
 		
-		SONG.speed /= songMultiplier;
 		songSpeed /= songMultiplier;
 
 		// sets the arrow skin, with some protection so the arrows don't randomly show up as haxe logos
@@ -2233,7 +2232,13 @@ class PlayState extends MusicBeatState
 				// Song ends abruptly on slow rate even with second condition being deleted,
 				// and if it's deleted on songs like cocoa then it would end without finishing instrumental fully,
 				// so no reason to delete it at all
-				if (unspawnNotes.length == 0 && notes.length == 0 && FlxG.sound.music.time / songMultiplier > (songLength - 100))
+				var curTime:Float = Conductor.songPosition - ClientPrefs.noteOffset;
+				
+				var secondsTotal:Int = Math.floor((songLength - curTime) / 1000);
+				if(secondsTotal < 0) secondsTotal = 0;
+					
+					// i'm trying o get this shit working and it won't :grief:
+				if (Conductor.songPosition > (songLength - 100))
 				{
 
 					endingSong = true;
