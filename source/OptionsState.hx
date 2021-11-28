@@ -397,9 +397,6 @@ class NotesSubstate extends MusicBeatSubstate
 	}
 }
 
-// this code is supposed to be a note skin menu but i'm dumb so i'm letting one of my team do this lol
-// uh i should really learn haxe shit
-
 class NoteSkinSubstate extends MusicBeatSubstate
 {
 	private var strumNotesY:Float = 120;

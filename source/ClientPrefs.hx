@@ -36,11 +36,13 @@ class ClientPrefs {
 	public static var noteSkinArray:Array<String> = [
 		'Arrows',
 		'Circles',
+		'Octogons',
+		'Pink-Octogons',
 		'Bob',
 		'Bosip',
 		'Wii',
 		'Gloopie',
-		'Ron',
+		'Ron'
 		//not all of these are done yet
 		//the shit that is used is above this shit
 		/*'Arrows',
