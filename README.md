@@ -6,6 +6,22 @@ Sword Engine is based off of Psych Engine, which was originally used on the [Min
 ## Compiling:
 A lot of dependencies are needed for Friday Night Funkin', so it's been put into a batch file. After you go through that, you can choose to either use the art folder with compiling batch files in it, or use commands like 'lime test windows -debug'. 
 
+### Or doing it manually:
+
+Follow a Friday Night Funkin' source code compilation tutorial, after this you will need to install LuaJIT.
+
+**I would recommend following the compile guide at:** [The Original Funkin Game's Github](https://github.com/ninjamuffin99/Funkin)
+
+Scroll down to the "build instructions" section and go from there.
+
+***MAKE SURE TO DOWNLOAD THE SOURCE CODE FOR THIS ENGINE AND NOT THE ORIGINAL BASE GAME FIRST.***
+
+One last thing, you will need to install LuaJIT along with the other libraries such as `flixel-addons` and etc.
+
+You can do this with: `haxelib install linc_luajit` on a Command prompt/PowerShell
+
+...Or if you don't want your mod to be able to run .lua scripts (why), delete the "LUA_ALLOWED" line on Project.xml
+
 ## Downloading:
 ### Actions Tab [Contains Latest Builds]
 
