@@ -4,10 +4,14 @@
 Sword Engine is based off of Psych Engine, which was originally used on the [Mind Games Mod](https://gamebanana.com/mods/301107), it's intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
 
 ## Compiling:
+### Semi-Auto setup:
+run the `setup.bat` file or smth
+
+### Or doing it manually:
+
 Follow a Friday Night Funkin' source code compilation tutorial, after this you will need to install LuaJIT.
 
-**I would recommend following the compile guide at:**
-[The Original Funkin Game's Github](https://github.com/ninjamuffin99/Funkin)
+**I would recommend following the compile guide at:** [The Original Funkin Game's Github](https://github.com/ninjamuffin99/Funkin)
 
 Scroll down to the "build instructions" section and go from there.
 
@@ -44,7 +48,7 @@ Scroll down until you see "Artifacts"
 
 And download **linuxBuild** or **windowsBuild**, 64-bit only.
 
-For Mac users, download the **windowsBuild** and use Wine to open it.
+For Mac users, try Wine. if that doesn't work, cry as loud as you can. no one will hear you.
 
 <a>
   <img align="left" alt="image" src="https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloading-actions-tab/image3.png" />
@@ -198,3 +202,4 @@ BUT I MIGHT NOT BECAUSE FUFK THAT SHIT
 DON'T WANNA GO THROUGH HELL
 
 ok that was cry about it #1 goodbye
+
