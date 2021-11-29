@@ -110,6 +110,7 @@ _____________________________________
 * [DONE] Note skins that only apply to the opponent
 * > [WORKS WITH ISSUES] Speed feature for songs [Songs don't end properly if the speed is changed period.]
 * This issue will be fixed soon hopefully.
+* > [WORKING ON IT] Fanciness [Makes menus n shit look fancy when enabled, thx Raf]
 * [NO PROGRESS YET] Custom difficulties without source [Hell]
 * [NO PROGRESS YET] Skip song & Skip intro in Pause Menu only because fuck Skip Intro being in gameplay
 * [NO PROGRESS YET] Extra keys [TRUE HELL, MIGHT NOT EVEN BE ADDED LOL]
