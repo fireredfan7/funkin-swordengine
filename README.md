@@ -47,7 +47,7 @@ Scroll down until you see "Artifacts"
 
 And download **linuxBuild** or **windowsBuild**, 64-bit only.
 
-For Mac users, cry louder.
+For Mac users, try Wine. if that doesn't work, cry as loud as you can. no one will hear you.
 
 <a>
   <img align="left" alt="image" src="https://github.com/swordcube/funkin-swordengine/blob/main/guideImages/downloading-actions-tab/image3.png" />
