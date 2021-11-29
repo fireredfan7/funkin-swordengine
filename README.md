@@ -4,6 +4,7 @@
 Sword Engine is based off of Psych Engine, which was originally used on the [Mind Games Mod](https://gamebanana.com/mods/301107), it's intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
 
 ## Compiling:
+
 ### Semi-Auto setup:
 run the `setup.bat` file or smth
 
