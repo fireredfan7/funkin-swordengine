@@ -903,7 +903,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 		'Note Delay',
 		'Scroll Speed',
 		'Note Size',
-		'Underlay Opacity'
+		'Underlay Opacity',
+		'Accuracy Mode'
 	];
 
 	static var options:Array<String> = [
@@ -927,6 +928,7 @@ class PreferencesSubstate extends MusicBeatSubstate
 		'Scroll Speed',
 		'Arrow Underlay',
 		'Underlay Opacity',
+		'Accuracy Mode',
 		'Hit Sounds',
 		'Miss Sounds',
 		'Engine Watermarks',
@@ -1172,6 +1174,13 @@ class PreferencesSubstate extends MusicBeatSubstate
 						ClientPrefs.laneTransparency += add/20;
 						if(ClientPrefs.laneTransparency < 0) ClientPrefs.laneTransparency = 0;
 						else if(ClientPrefs.laneTransparency > 1) ClientPrefs.laneTransparency = 1;
+						
+					case 'Accuracy Mode':
+						ClientPrefs.accuracyMode += add;
+						
+						if(ClientPrefs.accuracyMode < 0) ClientPrefs.accuracyMode = (ClientPrefs.accuracyModeArray.length - 1);
+						
+						else if(ClientPrefs.accuracyMode > ClientPrefs.accuracyModeArray.length - 1) ClientPrefs.accuracyMode = 0;
 
 					case 'Note Size':
 						ClientPrefs.noteSize += add/20;
@@ -1270,6 +1279,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 				daText = "If checked, a black box will go behind the arrows.\nUse Underlay Opacity to change how visible it is.";
 			case 'Underlay Opacity':
 				daText = "Change how visible your arrow underlay is. (Arrow Underlay must be enabled)";
+			case 'Accuracy Mode':
+				daText = "Press left and right to change modes.\n0 - Simple | 1 - Complex";
 		}
 		descText.text = daText;
 
@@ -1371,11 +1382,13 @@ class PreferencesSubstate extends MusicBeatSubstate
 						daText = ClientPrefs.noteOffset + 'ms';
 					case 'Note Size':
 						daText = FlxStringUtil.formatMoney(ClientPrefs.noteSize) + 'x';
-						if (ClientPrefs.noteSize == 0.7) daText += "(Default)";
+						if (ClientPrefs.noteSize == 0.7) daText += " (Default)";
 					case 'Scroll Speed':
 						daText = ClientPrefs.speed+"";
 					case 'Underlay Opacity':
 						daText = FlxStringUtil.formatMoney(ClientPrefs.laneTransparency)+"";
+					case 'Accuracy Mode':
+						daText = ClientPrefs.accuracyModeArray[ClientPrefs.accuracyMode];
 				}
 				var lastTracker:FlxSprite = text.sprTracker;
 				text.sprTracker = null;

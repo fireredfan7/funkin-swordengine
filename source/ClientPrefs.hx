@@ -33,6 +33,13 @@ class ClientPrefs {
 	public static var noteSkinNum:Int = 0;
 	public static var underlayVisible:Bool = false;
 	public static var laneTransparency:Float = 0.7;
+	
+	public static var accuracyMode:Int = 1; // 0 - Simple, 1 - Complex 
+	public static var accuracyModeArray:Array<String> = [
+		'Simple', // 0
+		'Complex' // 1
+	];
+	
 	public static var noteSkinArray:Array<String> = [
 		'Arrows',
 		'Circles',
@@ -114,6 +121,7 @@ class ClientPrefs {
 		FlxG.save.data.customNoteSkin = customNoteSkin;
 		FlxG.save.data.laneTransparency = laneTransparency;
 		FlxG.save.data.underlayVisible = underlayVisible;
+		FlxG.save.data.accuracyMode = accuracyMode;
 		
 		// note skin shit
 		FlxG.save.data.noteSkinNum = noteSkinNum;
@@ -218,6 +226,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.underlayVisible != null) {
 			underlayVisible = FlxG.save.data.underlayVisible;
+		}
+		if(FlxG.save.data.accuracyMode != null) {
+			accuracyMode = FlxG.save.data.accuracyMode;
 		}
 		
 		// note skin shit

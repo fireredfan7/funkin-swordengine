@@ -121,6 +121,7 @@ class PlayState extends MusicBeatState
 	
 	//rating shit
 	public var accuracyNum:Float = 0;
+	public var accuracyText:String = 'idfk man';
 	public var goods:Int = 0;
 	public var bads:Int = 0;
 	public var shits:Int = 0;
@@ -2075,10 +2076,22 @@ class PlayState extends MusicBeatState
 		
 		accuracyNum = ratingPercent * 100;
 		
+		// stupid ass fucking accuracy mode shit
+		if(ClientPrefs.accuracyMode == 0) {
+		
+			accuracyText = '100%';
+			if(songMisses > 0) accuracyText = Math.floor(accuracyNum * 100) / 100 + '%';
+			
+		} else {
+		
+			accuracyText = Math.floor(accuracyNum * 100) / 100 + '%';
+			
+		}
+		
 		if(ratingString == '?') {
 			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: 0%' + ' | Rating: N/A';
 		} else{
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ' + Math.floor(accuracyNum * 100) / 100 + '% | Rating: ' + ratingString + ' (' + ratingString2 + ')';
+			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ' + accuracyText + ' | Rating: ' + ratingString + ' (' + ratingString2 + ')';
 		}
 
 		if(cpuControlled) {
@@ -4147,6 +4160,11 @@ class PlayState extends MusicBeatState
 				}
 			}
 			
+			if(ClientPrefs.accuracyMode == 0 && songMisses < 1) {
+				ratingString = ratingStuff[10][0];
+			}
+
+			
 			// fc rating or whatever
 			
 			/*
@@ -4178,6 +4196,10 @@ class PlayState extends MusicBeatState
 			
 				ratingString2 = ratingStuff2[0];
 				
+			}
+			
+			if(ClientPrefs.accuracyMode == 0 && songMisses < 1) {
+				ratingString2 = ratingStuff2[4];
 			}
 
 			setOnLuas('rating', ratingPercent);
