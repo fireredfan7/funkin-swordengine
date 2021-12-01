@@ -2089,9 +2089,9 @@ class PlayState extends MusicBeatState
 		}
 		
 		if(ratingString == '?') {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: 0%' + ' | Rating: N/A';
+			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Health: ' + healthBar.percent + '% | Accuracy: 0%' + ' | Rating: N/A';
 		} else{
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ' + accuracyText + ' | Rating: ' + ratingString + ' (' + ratingString2 + ')';
+			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Health: ' + healthBar.percent + '% | Accuracy: ' + accuracyText + ' | Rating: ' + ratingString + ' (' + ratingString2 + ')';
 		}
 
 		if(cpuControlled) {
@@ -2240,25 +2240,15 @@ class PlayState extends MusicBeatState
 		
 		if (generatedMusic)
 		{
-			if (songStarted && !endingSong)
+			if (startedCountdown && canPause && !endingSong)
 			{
-				// Song ends abruptly on slow rate even with second condition being deleted,
+				// Song ends abruptly on slow rate even with second condition being deleted, 
 				// and if it's deleted on songs like cocoa then it would end without finishing instrumental fully,
 				// so no reason to delete it at all
-				var curTime:Float = Conductor.songPosition - ClientPrefs.noteOffset;
-				
-				var secondsTotal:Int = Math.floor((songLength - curTime) / 1000);
-				if(secondsTotal < 0) secondsTotal = 0;
-					
-					// i'm trying o get this shit working and it won't :grief:
-				if (Conductor.songPosition > (songLength - 100))
+				if (FlxG.sound.music.length / songMultiplier - Conductor.songPosition <= 20)
 				{
-
-					endingSong = true;
-					new FlxTimer().start(2, function(timer)
-					{
-						finishSong();
-					});
+					//songPosition = FlxG.sound.music.length;
+					finishSong();
 				}
 			}
 		}
