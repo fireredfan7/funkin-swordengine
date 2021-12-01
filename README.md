@@ -1,5 +1,9 @@
 ⚠️ **WARNING:** This README is currently incomplete, This warning will be removed once it's complete.
 
+# Major Note:
+⚠️ **ENGINE NEWS:** Everything currently in the engine will have to be redone once the Psych Engine v0.5 source code is finished.
+This is because the engine will move to the new source code to prevent hell [also known as lots of errors and compiling for like 2 features]
+
 # Friday Night Funkin' - Sword Engine
 Sword Engine is based off of Psych Engine, which was originally used on the [Mind Games Mod](https://gamebanana.com/mods/301107), it's intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
 
