@@ -244,6 +244,7 @@ class PlayState extends MusicBeatState
 	public var songMisses:Int = 0;
 	public var ghostMisses:Int = 0;
 	public var scoreTxt:FlxText;
+	public var songTxt:FlxText;
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
 
@@ -954,6 +955,13 @@ class PlayState extends MusicBeatState
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
+		
+		songTxt = new FlxText(0, 700, FlxG.width, "", 18);
+		songTxt.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		songTxt.scrollFactor.set();
+		songTxt.borderSize = 1.25;
+		songTxt.visible = !ClientPrefs.hideHud;
+		add(songTxt);
 
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -976,6 +984,7 @@ class PlayState extends MusicBeatState
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
 		botplayTxt.cameras = [camHUD];
+		songTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
@@ -2073,6 +2082,8 @@ class PlayState extends MusicBeatState
 		// basically the layout should go like this:
 		// Score: 696969 | Misses: 69 | Accuracy: 69% | Rating: comedy (SDEEZNUTS)
 		// old system below just in case i fuck up
+		
+		songTxt.text = (SONG.song) + ' | ' + storyDifficultyText;
 		
 		accuracyNum = ratingPercent * 100;
 		
