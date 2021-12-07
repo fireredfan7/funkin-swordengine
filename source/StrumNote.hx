@@ -11,6 +11,8 @@ class StrumNote extends FlxSprite
 	private var colorSwap:ColorSwap;
 	public var resetAnim:Float = 0;
 	private var noteData:Int = 0;
+	public var skin:String = 'NOTE_assets';
+	private var oldSkin:String = '';
 
 	private var player:Int;
 
@@ -22,8 +24,13 @@ class StrumNote extends FlxSprite
 		this.noteData = leData;
 		super(x, y);
 
-		var skin:String = 'NOTE_assets';
+		loadNoteSkin(leData, player);
+	}
+	
+	public function loadNoteSkin(leData:Int, player:Int) {
+		skin = 'NOTE_assets';
 		if(PlayState.arrowSkin != null && PlayState.arrowSkin.length > 1) skin = PlayState.arrowSkin;
+		oldSkin = skin;
 		// bob and bosip like skins have to be hardcoded in, but you have to hardcode a new skin in anyways
 		// sooo
 		
@@ -32,10 +39,10 @@ class StrumNote extends FlxSprite
 		// (player - yourskin2)
 		// ADD A NEW CASE LIKE THIS:
 		//	case 'YOURSKINNAME_assets':
-		//		if(isPlayer) skin = 'SKINFORBF_assets';
+		//		if(player == 1) skin = 'SKINFORBF_assets';
 		// OTHERWISE DO THIS:
 		//	case 'YOURSKINNAME_assets':
-		//		if(isPlayer) skin = 'NOTE_assets';
+		//		if(player == 1) skin = 'NOTE_assets';
 			
 		switch(skin) {
 			case 'Bob_assets' | 'Bosip_assets' | 'Gloopie_assets' | 'Ron_assets':
@@ -134,6 +141,10 @@ class StrumNote extends FlxSprite
 		
 		/*if(animation.curAnim.name == 'confirm' && !PlayState.isPixelStage) {
 			updateConfirmOffset();
+		}*/
+		
+		/*if(skin != PlayState.arrowSkin && PlayState.arrowSkin != 'NOTE_assets') {
+			loadNoteSkin(noteData, player);
 		}*/
 
 		super.update(elapsed);
